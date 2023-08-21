@@ -4,7 +4,6 @@ import { currentUser } from "@clerk/nextjs";
 
 async function OnBoarding() {
   const user = await currentUser();
-  // console.log(user);
 
   const userInfo = {};
 
