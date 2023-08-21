@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { SignOutButton, SignedIn } from "@clerk/nextjs";
-import Logouticon from "/public/logout-icon.svg";
 
 function LeftSidebar() {
   const router = useRouter();
@@ -38,7 +37,12 @@ function LeftSidebar() {
             }}
           >
             <div className="flex cursor-pointer">
-              <Image src={Logouticon} alt="sss" width={25} height={25} />
+              <Image
+                src="/assets/logout-icon.svg"
+                alt="sss"
+                width={25}
+                height={25}
+              />
               <p className="max-lg:hidden p-4 gap-4">Logout</p>
             </div>
           </SignOutButton>

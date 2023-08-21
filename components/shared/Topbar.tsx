@@ -20,7 +20,12 @@ function Topbar() {
           <SignedIn>
             <SignOutButton>
               <div className="flex cursor-pointer">
-                <Image src={Logouticon} alt="" width={25} height={25}></Image>
+                <Image
+                  src="/assets/logout-icon.svg"
+                  alt=""
+                  width={25}
+                  height={25}
+                />
               </div>
             </SignOutButton>
           </SignedIn>
