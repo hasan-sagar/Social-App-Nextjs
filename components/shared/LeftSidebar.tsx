@@ -38,7 +38,7 @@ function LeftSidebar() {
             }}
           >
             <div className="flex cursor-pointer">
-              <Image src={Logouticon} alt="" width={25} height={25} />
+              <Image src={Logouticon} alt="sss" width={25} height={25} />
               <p className="max-lg:hidden p-4 gap-4">Logout</p>
             </div>
           </SignOutButton>
