@@ -36,7 +36,11 @@ function PostCard({
   isComment,
 }: Props) {
   return (
-    <article className="flex w-full flex-col rounded-xl p-7 bg-[#FFFFFF] shadow-md">
+    <article
+      className={`flex w-full flex-col rounded-xl p-7 bg-[#FFFFFF] shadow-md ${
+        isComment && "px-7 shadow-none bg-transparent"
+      }`}
+    >
       <div className="flex items-start justify-between">
         <div className="flex w-full flex-1 flex-row gap-4">
           <div className="flex flex-col items-center">
@@ -90,6 +94,11 @@ function PostCard({
                   height={20}
                 />
               </div>
+              {isComment && comments.length > 0 && (
+                <Link href={`/post/${id}`}>
+                  <p className="mt-1">{comments.length} replies</p>
+                </Link>
+              )}
             </div>
           </div>
         </div>

@@ -40,6 +40,13 @@ body,
   .card_bar {
     @apply relative mt-2 w-0.5 grow rounded-full;
   }
+  .comment-form_btn {
+    @apply rounded-3xl bg-[#8338ec] px-8 py-2  !important;
+  }
+
+  .comment-form {
+    @apply mt-10 flex items-center gap-4 py-5  !important;
+  }
 }
 
 @layer utilities {

@@ -62,3 +62,64 @@ export async function getPost(pageNumber = 1, pageSize = 20): Promise<any> {
     console.log(error);
   }
 }
+
+export async function getSinglePost(id: string) {
+  try {
+    dbConnect();
+    const post = await Post.findById(id)
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id id name image",
+      })
+      .populate({
+        path: "children",
+        populate: [
+          {
+            path: "author",
+            model: User,
+            select: "_id id name parentId image",
+          },
+          {
+            path: "children",
+            model: Post,
+            populate: {
+              path: "author",
+              model: User,
+              select: "_id id name parentId image",
+            },
+          },
+        ],
+      })
+      .exec();
+    return post;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function addCommentPost(
+  postId: string,
+  comment: string,
+  userId: string,
+  path: string
+) {
+  try {
+    dbConnect();
+    const post = await Post.findById(postId);
+    if (!post) {
+      throw new Error("Post Not Found");
+    }
+    const commentPost = new Post({
+      text: comment,
+      author: userId,
+      parentId: postId,
+    });
+    const saveComment = await commentPost.save();
+    post.children.push(saveComment._id);
+    await post.save();
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+  }
+}
