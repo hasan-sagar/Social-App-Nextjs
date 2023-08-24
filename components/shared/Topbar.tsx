@@ -26,6 +26,12 @@ function Topbar() {
                   width={25}
                   height={25}
                 />
+                <Image
+                  src="/assets/friends-icon.svg"
+                  alt=""
+                  width={25}
+                  height={25}
+                />
               </div>
             </SignOutButton>
           </SignedIn>
