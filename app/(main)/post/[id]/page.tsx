@@ -9,7 +9,6 @@ import React from "react";
 async function page({ params }: { params: { id: string } }) {
   if (!params) return null;
   const user = await currentUser();
-  console.log(user);
 
   if (!user) return null;
 
@@ -17,7 +16,6 @@ async function page({ params }: { params: { id: string } }) {
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const post = await getSinglePost(params.id);
-  const userId = userInfo._id;
 
   return (
     <section className="relative">

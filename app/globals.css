@@ -47,6 +47,9 @@ body,
   .comment-form {
     @apply mt-10 flex items-center gap-4 py-5  !important;
   }
+  .tab {
+    @apply flex min-h-[50px] flex-1 items-center gap-3 bg-[#FFFFFF]  data-[state=active]:bg-[#dee2e6] text-black data-[state=active]:text-black !important;
+  }
 }
 
 @layer utilities {
