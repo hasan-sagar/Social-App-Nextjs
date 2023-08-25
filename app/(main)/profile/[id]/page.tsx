@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React from "react";
 import { profileTabs } from "@/constants";
 import Image from "next/image";
+import PostsTab from "@/components/shared/PostsTab";
 
 async function page({ params }: { params: { id: string } }) {
   const user = await currentUser();
@@ -13,7 +14,6 @@ async function page({ params }: { params: { id: string } }) {
   if (!user) return null;
 
   const userInfo = await fetchUser(params.id);
-  console.log(userInfo);
 
   if (!userInfo?.onboarded) redirect("/onboarding");
 
@@ -48,6 +48,15 @@ async function page({ params }: { params: { id: string } }) {
               </TabsTrigger>
             ))}
           </TabsList>
+          {profileTabs.map((tab) => (
+            <TabsContent key={`content-${tab.label}`} value={tab.value}>
+              <PostsTab
+                currentUserId={user.id}
+                accountId={userInfo.id}
+                accountType="User"
+              />
+            </TabsContent>
+          ))}
         </Tabs>
       </div>
     </section>

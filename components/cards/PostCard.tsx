@@ -37,7 +37,7 @@ function PostCard({
 }: Props) {
   return (
     <article
-      className={`flex w-full flex-col rounded-xl p-7 bg-[#FFFFFF] shadow-md ${
+      className={`flex w-full flex-col rounded-xl p-5 bg-[#FFFFFF] shadow-md ${
         isComment && "px-7 shadow-none bg-transparent"
       }`}
     >

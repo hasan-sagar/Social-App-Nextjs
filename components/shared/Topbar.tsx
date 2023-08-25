@@ -2,7 +2,6 @@ import { OrganizationSwitcher, SignOutButton, SignedIn } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Logouticon from "/public/logout-icon.svg";
 
 function Topbar() {
   const checkUserLoggedIn = true;
