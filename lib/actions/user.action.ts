@@ -5,6 +5,7 @@ import { dbConnect } from "../dbConnect";
 import { revalidatePath } from "next/cache";
 import Community from "../models/community.model";
 import Post from "../models/post.model";
+import { FilterQuery, SortOrder } from "mongoose";
 
 interface Params {
   userId: string;
@@ -76,6 +77,43 @@ export async function getUsersPosts(userId: string) {
       },
     });
     return posts;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getUsers({
+  userId,
+  searchString = "",
+  pageNumber = 1,
+  pageSize = 20,
+  sortBy = "desc",
+}: {
+  userId: string;
+  searchString?: string;
+  pageNumber?: number;
+  pageSize?: number;
+  sortBy?: SortOrder;
+}) {
+  try {
+    dbConnect();
+    const skip = (pageNumber - 1) * pageSize;
+    const regex = new RegExp(searchString, "i");
+    const query: FilterQuery<typeof User> = {
+      id: { $ne: userId },
+    };
+    if (searchString.trim() !== "") {
+      query.$or = [
+        { username: { $regex: regex } },
+        { name: { $regex: regex } },
+      ];
+    }
+    const sort = { createdAt: sortBy };
+    const usersData = User.find(query).sort(sort).skip(skip).limit(pageSize);
+    const totalUsersCount = User.countDocuments(query);
+    const users = await usersData.exec();
+    const isNext = (await totalUsersCount) > skip + users.length;
+    return { users, isNext };
   } catch (error) {
     console.log(error);
   }
