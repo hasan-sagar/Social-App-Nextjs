@@ -59,6 +59,9 @@ body,
   .user-card_btn {
     @apply h-auto min-w-[74px] rounded-lg bg-[#8338ec] text-[12px] !important;
   }
+  .activity-card {
+    @apply flex items-center gap-2 rounded-md bg-[#FFFFFF] px-7 py-4;
+  }
 }
 
 @layer utilities {

@@ -118,3 +118,32 @@ export async function getUsers({
     console.log(error);
   }
 }
+
+export async function getUserActivity(userId: string) {
+  try {
+    dbConnect();
+    const userPosts = await Post.find({ author: userId });
+    const childThreadIds = userPosts.reduce((acc, userPost) => {
+      return acc.concat(userPost.children);
+    }, []);
+    const replies = await Post.find({
+      _id: { $in: childThreadIds },
+    }).populate({
+      path: "author",
+      model: User,
+      select: "name image _id",
+    });
+    // const replies = await Post.find({
+    //   _id: { $in: childThreadIds },
+    //   author: { $ne: userId },
+    // }).populate({
+    //   path: "author",
+    //   model: User,
+    //   select: "name image _id",
+    // });
+
+    return replies;
+  } catch (error) {
+    console.log(error);
+  }
+}
